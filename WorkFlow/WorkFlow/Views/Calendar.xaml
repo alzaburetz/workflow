@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="WorkFlow.Views.Calendar">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem></ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Label Text="Месяц" 
+                   x:Name="Mounth"
+                   Margin="0,0,0,20"
+                   FontSize="Large"
+                   TextColor="White"
+                   FontFamily="{StaticResource RegularFont}"/>
+            <Frame CornerRadius="10"
+                   Padding="15">
+                <Grid BindableLayout.ItemsSource="{Binding Calendar}" 
+                  x:Name="CalendarGrid"
+                  HeightRequest="300"
+                  HorizontalOptions="FillAndExpand">
+                    <Grid.ColumnSpacing>20</Grid.ColumnSpacing>
+                    <Grid.RowSpacing>20</Grid.RowSpacing>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.2*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="{Binding Day}"/>
+                </Grid>
+            </Frame> 
+            
+           
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

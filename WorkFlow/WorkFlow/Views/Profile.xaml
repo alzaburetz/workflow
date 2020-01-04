@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:WorkFlow.Models"
+             mc:Ignorable="d"
+             x:Class="WorkFlow.Views.Profile">
+    <Shell.TitleView>
+        <Label Text="WORKFLOW"
+               VerticalOptions="FillAndExpand"
+               HorizontalOptions="FillAndExpand"
+               TextColor="White"
+               VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Center"
+               FontSize="Large"
+               Style="{StaticResource Title}"
+               FontAttributes="Bold"/>
+    </Shell.TitleView>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="edit" Clicked="EditProfile"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" x:Key="Title"></Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontFamily" Value="{StaticResource LightFont}"/>
+                <Setter Property="FontSize" Value="Medium"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Frame BackgroundColor="#1C1C1C"
+                   Opacity="0.6"
+                   CornerRadius="10"
+                   Padding="20">
+                <StackLayout BackgroundColor="Transparent">
+                    <Label Text="{Binding Profile.Name}"/>
+                    <Label Text="{Binding Profile.Date}"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
