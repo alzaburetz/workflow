@@ -6,7 +6,7 @@
              xmlns:models="clr-namespace:WorkFlow.Models"
              mc:Ignorable="d"
              x:Class="WorkFlow.Views.Profile">
-    <Shell.TitleView>
+    <!--<Shell.TitleView>
         <Label Text="WORKFLOW"
                VerticalOptions="FillAndExpand"
                HorizontalOptions="FillAndExpand"
@@ -14,16 +14,16 @@
                VerticalTextAlignment="Center"
                HorizontalTextAlignment="Center"
                FontSize="Large"
-               Style="{StaticResource Title}"
+               
                FontAttributes="Bold"/>
-    </Shell.TitleView>
+    </Shell.TitleView>-->
 
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="edit" Clicked="EditProfile"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style TargetType="Label" x:Key="Title"></Style>
+            <Style TargetType="Label" x:Key="TitleStyle"></Style>
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="White"/>
                 <Setter Property="FontFamily" Value="{StaticResource LightFont}"/>
@@ -37,9 +37,10 @@
                    Opacity="0.6"
                    CornerRadius="10"
                    Padding="20">
-                <StackLayout BackgroundColor="Transparent">
-                    <Label Text="{Binding Profile.Name}"/>
-                    <Label Text="{Binding Profile.Date}"/>
+                <StackLayout BackgroundColor="Transparent" Spacing="15">
+                    <Label x:Name="UserName"/>
+                    <Label x:Name="Formed"/>
+                    <Label x:Name="Status"/>
                 </StackLayout>
             </Frame>
         </StackLayout>

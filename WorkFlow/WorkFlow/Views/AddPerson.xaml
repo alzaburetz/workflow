@@ -5,13 +5,30 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              Title="{Binding Title}"
+             xmlns:behavior="clr-namespace:WorkFlow.Behaviors"
              x:Class="WorkFlow.Views.AddPerson">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="PlaceholderColor" Value="White"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Entry x:Name="Name" Placeholder="Имя"/>
-            <Entry x:Name="Graph" Placeholder="Рабочие дни / Выходные дни"/>
-            <DatePicker x:Name="Date"/>
+        <StackLayout Spacing="30" Padding="40">
+            <Entry x:Name="Name" Placeholder="Имя" Keyboard="Default"/>
+            <Entry x:Name="Graph" Placeholder="Рабочие дни / Выходные дни" Keyboard="Numeric">
+                <Entry.Behaviors>
+                    <behavior:MaskedBehavior Mask="X / X"/>
+                </Entry.Behaviors>
+            </Entry>
+            <DatePicker x:Name="Date" 
+                        Format="dd.MM.yyyy"
+                        TextColor="White">
+            </DatePicker>
             <Button Clicked="Save" Text="Сохранить"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

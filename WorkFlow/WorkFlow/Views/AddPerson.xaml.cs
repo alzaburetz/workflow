@@ -37,10 +37,17 @@ namespace WorkFlow.Views
             {
                 viewModel.Getuser.Execute(null);
                 await Task.Delay(200);
-                var person = viewModel.CurrentPerson;
-                Name.Text = person.Name;
-                Date.Date = person.NextWorkDay;
-                Graph.Text = $"{person.WorkDays} / {person.WeekDays}";
+                try
+                {
+                    var person = viewModel.CurrentPerson;
+                    Name.Text = person.Name;
+                    Date.Date = person.NextWorkDay;
+                    Graph.Text = $"{person.WorkDays} / {person.WeekDays}";
+                }
+                catch
+                {
+
+                }
             }
         }
 
@@ -55,7 +62,7 @@ namespace WorkFlow.Views
                 viewModel.Save.Execute(person);
             else
                 viewModel.Update.Execute(person);
-            //await Shell.Current.Navigation.PopModalAsync();
+            await Shell.Current.Navigation.PopToRootAsync();
         }
     }
 }

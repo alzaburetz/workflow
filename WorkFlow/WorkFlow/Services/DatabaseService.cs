@@ -52,7 +52,8 @@ namespace WorkFlow.Services
         {
             return Task.Run(() =>
             {
-                return database.GetCollection<T>(collection).Update(item);
+                var db = database.GetCollection<T>(collection);
+                return db.Update(item);
             });
         }
 

@@ -12,6 +12,7 @@ namespace WorkFlow.ViewModels
     {
         public ObservableCollection<Person> People { get; set; }
         public Command GetAllPeople { get; set; }
+        public Command DeletePerson { get; set; }
         public PeopleViewModel()
         {
             People = new ObservableCollection<Person>();
@@ -22,8 +23,14 @@ namespace WorkFlow.ViewModels
                 while (enumerable.MoveNext())
                 {
                     enumerable.Current.IsWorking = enumerable.Current.WorksToday();
+                    enumerable.Current.FormGraph();
                     People.Add(enumerable.Current);
                 }
+            });
+            DeletePerson = new Command(async (person) =>
+            {
+                await DataBase.DeleteItem<Person>("People", Query.Where("_id", x => x.AsInt32 == (person as Person).Id));
+                People.Remove(person as Person);
             });
         }
     }

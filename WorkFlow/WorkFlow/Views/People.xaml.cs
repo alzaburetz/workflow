@@ -31,5 +31,11 @@ namespace WorkFlow.Views
         {
             await Shell.Current.Navigation.PushAsync(new AddPerson(false));
         }
+
+        private async void WatchCalendar(object sender, EventArgs args)
+        {
+            var id = Convert.ToInt32((sender as Frame).ClassId);
+            await Shell.Current.Navigation.PushAsync(new Calendar(false, id));
+        }
     }
 }

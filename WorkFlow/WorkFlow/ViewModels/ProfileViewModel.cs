@@ -21,6 +21,8 @@ namespace WorkFlow.ViewModels
             GetUser = new Command(async () => 
             {
                 Profile = await DataBase.GetItem<Person>("People", Query.Where("UserFlag", x => x.AsBoolean == true));
+                if (Profile != null)
+                    Profile.FormGraph();
                 UserExists = Profile != null;
             });
         }

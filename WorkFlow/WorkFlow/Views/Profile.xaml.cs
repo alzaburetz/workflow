@@ -14,7 +14,7 @@ namespace WorkFlow.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Profile : ContentPage
     {
-        ProfileViewModel viewModel;
+        ProfileViewModel viewModel { get; set; }
         public Profile()
         {
             BindingContext = viewModel = new ProfileViewModel();
@@ -29,6 +29,14 @@ namespace WorkFlow.Views
             if (!viewModel.UserExists)
             {
                 await Shell.Current.Navigation.PushModalAsync(new AddPerson(true));
+            }
+            else
+            {
+                var StatusConverter = new Converters.StatusColorConverter();
+                UserName.Text = viewModel.Profile.Name;
+                Formed.Text = viewModel.Profile.FormedWorkflow;
+                Status.Text = viewModel.Profile.IsWorking ? "РАБОЧИЙ ДЕНЬ" : "ВЫХОДНОЙ ДЕНЬ";
+                Status.TextColor = (Color)StatusConverter.Convert(viewModel.Profile.IsWorking, typeof(Color), null, null);
             }
         }
 

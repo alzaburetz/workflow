@@ -4,10 +4,13 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:models="clr-namespace:WorkFlow.Models"
+             xmlns:converters="clr-namespace:WorkFlow.Converters"
              Shell.BackgroundColor="#1C1C1C"
              Title="{Binding Title}"
+             x:Name="PeoplePage"
              x:Class="WorkFlow.Views.People">
-    <Shell.TitleView>
+    <!--<Shell.TitleView>
         <Label Text="WORKFLOW"
                VerticalOptions="FillAndExpand"
                HorizontalOptions="FillAndExpand"
@@ -16,7 +19,7 @@
                HorizontalTextAlignment="Center"
                FontSize="Large"
                FontAttributes="Bold"/>
-    </Shell.TitleView>
+    </Shell.TitleView>-->
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="adduser" Clicked="AddUser"/>
     </ContentPage.ToolbarItems>
@@ -24,7 +27,11 @@
         <ResourceDictionary>
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontFamily" Value="{StaticResource LightFont}"/>
+                <Setter Property="FontSize" Value="Medium"/>
             </Style>
+            <converters:StatusColorConverter x:Key="StatusColor"/>
+            <converters:StatusConverter x:Key="Status"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -37,16 +44,64 @@
                                        Orientation="Vertical"
                                        SnapPointsAlignment="Start"/>
                 </CollectionView.ItemsLayout>
+                <CollectionView.EmptyView>
+                    <StackLayout VerticalOptions="FillAndExpand"
+                                 HorizontalOptions="FillAndExpand">
+                        <Frame CornerRadius="10"
+                               Margin="30"
+                               VerticalOptions="CenterAndExpand"
+                               Opacity="0.4"
+                               BackgroundColor="#1c1c1c">
+                            <Label FontSize="Large">
+                                <Label.FormattedText>
+                                    У вас не добавлены графики людей. 
+Нажмите на кнопку в верхнем правом углу 
+экрана для добавления человека
+                                </Label.FormattedText>
+                            </Label>
+                        </Frame>
+                    </StackLayout>
+                </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="models:Person">
                         <Frame CornerRadius="10"
                                BackgroundColor="#1C1C1C"
                                Opacity="0.6"
+                               ClassId="{Binding Id}"
                                Padding="20">
-                            <StackLayout BackgroundColor="Transparent">
-                                <Label Text="{Binding Name}"/>
-                                <Label Text="{Binding IsWorking}"/>
-                            </StackLayout>
+                            <Grid BackgroundColor="Transparent">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.333*"/>
+                                        <RowDefinition Height="0.333*"/>
+                                        <RowDefinition Height="0.333*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.9*"/>
+                                        <ColumnDefinition Width="0.1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Name}"/>
+                                    <Label Text="{Binding IsWorking, Converter={StaticResource Status}}"
+                                           Grid.Column="0"
+                                           Grid.Row="2"
+                                           TextColor="{Binding IsWorking, Converter={StaticResource StatusColor}}"/>
+                                    <Label Text="{Binding FormedWorkflow}"
+                                           Grid.Row="1"/>
+                                <StackLayout Grid.Column="1"
+                                             x:DataType="{x:Null}"
+                                             Padding="0"
+                                                 BackgroundColor="Transparent">
+                                    <ImageButton Source="delete"
+                                                 HeightRequest="30"
+                                                 BackgroundColor="Transparent"
+                                                 Aspect="AspectFit"
+                                                 Command="{Binding Path=BindingContext.DeletePerson, Source={x:Reference PeoplePage}}"
+                                                 CommandParameter="{Binding}"
+                                                 Margin="0"/>
+                                </StackLayout>
+                            </Grid>
+                                <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="WatchCalendar"/>
+                            </Frame.GestureRecognizers>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

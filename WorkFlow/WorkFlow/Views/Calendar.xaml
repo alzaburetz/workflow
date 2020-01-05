@@ -4,11 +4,27 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             Title="{Binding Title}"
              x:Class="WorkFlow.Views.Calendar">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem></ToolbarItem>
     </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource LightFont}"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Shell.TitleView>
+        <Label Text="{Binding Title}"
+               FontSize="Large"
+               VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Center"
+               TextColor="White"/>
+    </Shell.TitleView>
 
     <ContentPage.Content>
         <StackLayout Padding="20">
@@ -27,11 +43,12 @@
                     <Grid.ColumnSpacing>20</Grid.ColumnSpacing>
                     <Grid.RowSpacing>20</Grid.RowSpacing>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.2*"/>
-                        <RowDefinition Height="0.2*"/>
-                        <RowDefinition Height="0.2*"/>
-                        <RowDefinition Height="0.2*"/>
-                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="0.15*"/>
+                        <RowDefinition Height="0.15*"/>
+                        <RowDefinition Height="0.15*"/>
+                        <RowDefinition Height="0.15*"/>
+                        <RowDefinition Height="0.15*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -42,8 +59,6 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-
-                    <Label Text="{Binding Day}"/>
                 </Grid>
             </Frame> 
             

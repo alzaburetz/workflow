@@ -31,7 +31,9 @@ namespace WorkFlow.ViewModels
             });
             Update = new Command(async (person) =>
             {
-                var updated = await DataBase.UpdateItem<Person>("People", person as Person, null);
+                await DataBase.DeleteItem<Person>("People", Query.Where("UserFlag", x => x.AsBoolean == true));
+                await DataBase.WriteItem<Person>("People", person as Person);
+                //var updated = await DataBase.UpdateItem<Person>("People", person as Person, null);
             });
         }
     }
